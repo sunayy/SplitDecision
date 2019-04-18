@@ -72,7 +72,7 @@ public class Main {
         final int remains = args.length;
         if (remains > PIN.MAX_REMAINED) {
             return Optional.of(MESSAGE_TOO_MANY);
-        } else switch (args.length) {
+        } else switch (remains) {
             case PIN.MAX_REMAINED:  return Optional.of(MESSAGE_GUTTER);
             case PIN.MIN_REMAINED:  return Optional.of(MESSAGE_REMAINED_ONLY_ONE);
             case PIN.NO_REMAINING:  return Optional.of(MESSAGE_STRIKE);
@@ -91,7 +91,7 @@ public class Main {
      */
     private static Boolean[] convertToSplitDecisionArrayFrom(final String[] inputRemains) {
         Boolean[] remains = new Boolean[PIN.values().length];
-        Arrays.fill(remains, 0);
+        Arrays.fill(remains, Boolean.FALSE);
 
         for (int i = 0; i < inputRemains.length; i++) {
             final int pinNum;
@@ -110,7 +110,7 @@ public class Main {
             if (pinNum == PIN.FIRST_PIN_NUMBER) {
                 return new Boolean[]{ Boolean.FALSE };
             }
-            remains[PIN.get(pinNum).getColNum()] = true;
+            remains[PIN.get(pinNum).getColNum()] = Boolean.TRUE;
         }
         return remains;
     }
